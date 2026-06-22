@@ -21,6 +21,43 @@
 
     * { box-sizing: border-box; }
 
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(56, 189, 248, 0.48) rgba(7, 16, 24, 0.36);
+    }
+
+    *::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background:
+        linear-gradient(180deg, rgba(7, 16, 24, 0.58), rgba(15, 23, 42, 0.34));
+      border: 1px solid rgba(125, 211, 252, 0.12);
+      border-radius: 999px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      min-height: 42px;
+      border: 2px solid rgba(7, 16, 24, 0.78);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(125, 211, 252, 0.9), rgba(56, 189, 248, 0.42));
+      box-shadow: inset 0 0 8px rgba(224, 242, 254, 0.28), 0 0 12px rgba(56, 189, 248, 0.24);
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background:
+        linear-gradient(180deg, rgba(186, 230, 253, 0.96), rgba(34, 211, 238, 0.58));
+      box-shadow: inset 0 0 10px rgba(240, 249, 255, 0.38), 0 0 16px rgba(56, 189, 248, 0.34);
+    }
+
+    *::-webkit-scrollbar-corner {
+      background: rgba(7, 16, 24, 0.5);
+    }
+
     html, body {
       margin: 0;
       min-height: 100%;
@@ -96,6 +133,56 @@
       margin-top: 4px;
       color: var(--muted);
       font-size: 13px;
+    }
+
+
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .back-link {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 34px;
+      padding: 8px 11px;
+      border: 1px solid rgba(125, 211, 252, 0.28);
+      border-radius: 8px;
+      color: #dbeafe;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.18), transparent 44%),
+        rgba(7, 16, 24, 0.72);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24), inset 0 0 16px rgba(56, 189, 248, 0.05);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-2px);
+      border-color: rgba(125, 211, 252, 0.56);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.28), transparent 44%),
+        rgba(8, 19, 31, 0.86);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.32), 0 0 18px rgba(56, 189, 248, 0.16);
+    }
+
+    .back-link:focus-visible {
+      outline: 2px solid rgba(125, 211, 252, 0.88);
+      outline-offset: 3px;
+    }
+
+    .back-icon {
+      font-size: 15px;
+      line-height: 1;
     }
 
     .stage-hint {
@@ -235,7 +322,6 @@
       pointer-events: none;
       transform: translateX(24px);
       transition: opacity 550ms ease, transform 700ms cubic-bezier(.2,.8,.2,1);
-      scrollbar-color: rgba(148, 163, 184, 0.55) rgba(15, 23, 42, 0.24);
     }
 
     .block-strip::before {
@@ -553,61 +639,388 @@
 
     .rule-workbench {
       position: absolute;
-      left: 4%;
-      right: 4%;
-      top: 98px;
-      bottom: 104px;
+      left: 5%;
+      right: 5%;
+      top: 100px;
+      bottom: 92px;
       display: grid;
-      grid-template-columns: minmax(420px, 1.45fr) 88px minmax(320px, 0.9fr);
-      gap: 16px;
+      grid-template-columns: minmax(440px, 1.45fr) 92px minmax(360px, 0.9fr);
+      gap: 14px;
       align-items: center;
       opacity: 0;
-      transform: translateY(34px) scale(0.96);
-      transition: opacity 650ms ease, transform 800ms ease;
+      transform: translateY(24px) scale(0.98);
+      transition: opacity 650ms ease, transform 800ms cubic-bezier(.18,.86,.24,1);
       pointer-events: none;
     }
 
+
+
+    .api-flight-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 18;
+      pointer-events: none;
+    }
+
+    .api-flight-dot {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.75);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 1380ms cubic-bezier(.18,.72,.16,1), opacity 620ms ease;
+    }
+
+    .api-flight-dot.table {
+      background: #facc15;
+      box-shadow: 0 0 24px rgba(250, 204, 21, 0.7);
+    }
+
+    .api-call-board {
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 100px;
+      bottom: 92px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      opacity: 0;
+      transform: none;
+      transition: opacity 650ms ease;
+      pointer-events: none;
+    }
+
+    .api-board-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid rgba(125, 211, 252, 0.24);
+      border-radius: 8px;
+      background: rgba(8, 13, 24, 0.78);
+      padding: 12px 14px;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.32);
+      backdrop-filter: blur(10px);
+    }
+
+    .api-board-header strong {
+      display: block;
+      font-size: 14px;
+      color: #f8fafc;
+      margin-bottom: 3px;
+    }
+
+    .api-board-header span {
+      color: #94a3b8;
+      font-size: 11px;
+      line-height: 1.36;
+    }
+
+    .api-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 7px;
+      color: #cbd5e1;
+      font-size: 10px;
+    }
+
+    .api-stats span {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 999px;
+      padding: 6px 9px;
+      background: rgba(15, 23, 42, 0.74);
+    }
+
+    .api-package-grid {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .api-package-lanes {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .api-lane {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 9px;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 8px;
+      background: rgba(7, 16, 24, 0.38);
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .api-lane.table-lane {
+      border-color: rgba(250, 204, 21, 0.26);
+      background: rgba(24, 20, 7, 0.25);
+    }
+
+    .api-lane-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: #e5e7eb;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .api-lane-title span {
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .api-lane-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+      gap: 9px;
+      align-content: start;
+      overflow: auto;
+      padding: 1px 2px 6px;
+    }
+
+    .table-lane .api-lane-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .api-package {
+      min-height: 86px;
+      border-radius: 8px;
+      border: 1px solid rgba(125, 211, 252, 0.26);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.18), transparent 42%),
+        rgba(8, 13, 24, 0.86);
+      padding: 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.34);
+      opacity: 0;
+      transform: scale(0.72);
+      transform-origin: center;
+      transition: opacity 360ms ease, transform 480ms cubic-bezier(.18,.86,.24,1), min-height 420ms ease;
+    }
+
+    .api-package.done {
+      min-height: 142px;
+    }
+
+    .api-package.arrived {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .api-package > * {
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity 260ms ease, transform 300ms ease;
+    }
+
+    .api-package.arrived > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .api-package.table {
+      border-color: rgba(250, 204, 21, 0.5);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(250, 204, 21, 0.2), transparent 42%),
+        rgba(8, 13, 24, 0.9);
+    }
+
+    .api-package-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .api-kind {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 3px 6px;
+      background: rgba(56, 189, 248, 0.16);
+      color: #bae6fd;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+
+    .api-package.table .api-kind {
+      background: rgba(250, 204, 21, 0.16);
+      color: #fef08a;
+    }
+
+    .api-progress {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .api-progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #38bdf8, #22c55e);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.34);
+    }
+
+    .api-package.arrived .api-progress span {
+      animation: apiFill var(--dur, 3s) ease-out forwards;
+      animation-delay: 160ms;
+    }
+
+    .api-package.table .api-progress span {
+      background: linear-gradient(90deg, #facc15, #22c55e);
+      box-shadow: 0 0 18px rgba(250, 204, 21, 0.28);
+    }
+
+    .api-package-foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      color: #94a3b8;
+      font-size: 10px;
+    }
+
+    .api-result {
+      color: #bbf7d0;
+    }
+
+    .api-rule-preview {
+      display: grid;
+      gap: 4px;
+      max-height: 0;
+      overflow: hidden;
+      margin-top: 0;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: max-height 520ms ease, margin-top 420ms ease, opacity 360ms ease, transform 420ms ease;
+    }
+
+    .api-package.done .api-rule-preview {
+      max-height: 92px;
+      margin-top: 9px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .api-rule-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 5px;
+      background: rgba(15, 23, 42, 0.56);
+      padding: 5px 6px;
+      color: #cbd5e1;
+      font-size: 9px;
+      line-height: 1.15;
+    }
+
+    .api-rule-row strong {
+      color: #e0f2fe;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .api-package.table .api-rule-row strong {
+      color: #fef08a;
+    }
+
+    @keyframes apiFill {
+      0% { width: 0; }
+      72% { width: calc(var(--p) * 0.94); }
+      100% { width: var(--p); }
+    }
+
+
     .pack-output-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
       gap: 10px;
       height: 100%;
       align-content: center;
+      min-height: 0;
     }
 
     .mini-rule-table,
     .clean-rule-table {
       border-radius: 8px;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      background: rgba(248, 250, 252, 0.96);
-      color: #0f172a;
-      box-shadow: 0 22px 56px rgba(0,0,0,0.4);
+      border: 1px solid rgba(125, 211, 252, 0.24);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56, 189, 248, 0.13), transparent 42%),
+        rgba(8, 13, 24, 0.88);
+      color: #e5e7eb;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.38);
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
     .mini-rule-table {
       align-self: center;
+      opacity: 0;
+      transform: translateX(42px) scale(0.94);
     }
+
+    body.step-6 .mini-rule-table {
+      animation: stage6CardSettle 780ms cubic-bezier(.18,.86,.24,1) forwards;
+    }
+
+    body.step-6 .mini-rule-table:nth-child(1) { animation-delay: 90ms; }
+    body.step-6 .mini-rule-table:nth-child(2) { animation-delay: 170ms; }
+    body.step-6 .mini-rule-table:nth-child(3) { animation-delay: 250ms; }
 
     .mini-rule-table h3,
     .clean-rule-table h3 {
       margin: 0;
       padding: 10px 12px;
-      color: #0f172a;
-      background: #dbeafe;
+      color: #e0f2fe;
+      background: rgba(14, 165, 233, 0.14);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
       font-size: 13px;
     }
 
     .mini-rule-table h3 {
-      background: #e0f2fe;
       font-size: 11px;
       min-height: 44px;
       display: flex;
       align-items: center;
     }
 
+    .clean-rule-table {
+      border-color: rgba(34, 197, 94, 0.32);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(34, 197, 94, 0.14), transparent 42%),
+        rgba(8, 13, 24, 0.9);
+      opacity: 0;
+      transform: translateX(38px) scale(0.96);
+    }
+
+    body.step-6 .clean-rule-table {
+      animation: stage6TableReveal 820ms cubic-bezier(.18,.86,.24,1) 430ms forwards;
+    }
+
     .clean-rule-table h3 {
-      background: #dcfce7;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.14);
     }
 
     table {
@@ -619,14 +1032,18 @@
     th, td {
       text-align: left;
       padding: 8px 9px;
-      border-top: 1px solid #cbd5e1;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
       vertical-align: top;
     }
 
     th {
-      color: #334155;
-      background: #f1f5f9;
+      color: #cbd5e1;
+      background: rgba(15, 23, 42, 0.72);
       font-weight: 700;
+    }
+
+    td {
+      color: #dbeafe;
     }
 
     .mini-rule-table table {
@@ -639,8 +1056,8 @@
     }
 
     tr.duplicate td {
-      background: #fee2e2;
-      color: #991b1b;
+      background: rgba(127, 29, 29, 0.42);
+      color: #fecaca;
       text-decoration: line-through;
       text-decoration-thickness: 1.5px;
     }
@@ -664,6 +1081,12 @@
       text-align: center;
       font-size: 11px;
       line-height: 1.25;
+      opacity: 0;
+      transform: scale(0.82);
+    }
+
+    body.step-6 .merge-step {
+      animation: stage6ArrowReveal 620ms cubic-bezier(.18,.86,.24,1) 300ms forwards;
     }
 
     .merge-arrow {
@@ -679,9 +1102,54 @@
       box-shadow: 0 0 34px rgba(56, 189, 248, 0.2);
     }
 
+
+
+    .final-run-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      border-top: 1px solid rgba(34, 197, 94, 0.28);
+      background: rgba(34, 197, 94, 0.18);
+    }
+
+    .final-run-summary div {
+      padding: 9px 10px;
+      background: rgba(7, 16, 24, 0.72);
+    }
+
+    .final-run-summary strong {
+      display: block;
+      color: #bbf7d0;
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    .final-run-summary span {
+      color: #f8fafc;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @keyframes stage6CardSettle {
+      0% { opacity: 0; transform: translateX(56px) scale(0.9); filter: blur(2px); }
+      70% { opacity: 1; transform: translateX(-5px) scale(1.02); filter: blur(0); }
+      100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes stage6ArrowReveal {
+      0% { opacity: 0; transform: scale(0.75); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes stage6TableReveal {
+      0% { opacity: 0; transform: translateX(44px) scale(0.94); filter: blur(2px); }
+      72% { opacity: 1; transform: translateX(-4px) scale(1.015); filter: blur(0); }
+      100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+    }
+
     .timeline {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 8px;
       color: var(--muted);
       font-size: 12px;
@@ -787,7 +1255,8 @@
     body.step-2 .tech-chip[data-stage~="2"],
     body.step-3 .tech-chip[data-stage~="3"],
     body.step-4 .tech-chip[data-stage~="4"],
-    body.step-5 .tech-chip[data-stage~="5"] {
+    body.step-5 .tech-chip[data-stage~="5"],
+    body.step-6 .tech-chip[data-stage~="6"] {
       display: inline-flex;
       opacity: 1;
       transform: translateY(0);
@@ -810,7 +1279,8 @@
 
     body.step-3 .pdf,
     body.step-4 .pdf,
-    body.step-5 .pdf {
+    body.step-5 .pdf,
+    body.step-6 .pdf {
       transform: translateX(-46px) scale(0.86);
       opacity: 0;
       filter: blur(1px);
@@ -865,7 +1335,8 @@
     }
 
     body.step-4 .block,
-    body.step-5 .block {
+    body.step-5 .block,
+    body.step-6 .block {
       opacity: 0;
       transform: scale(0.2);
     }
@@ -926,6 +1397,22 @@
       pointer-events: auto;
     }
 
+    body.step-5 .rag-3d {
+      opacity: 0.38;
+      transform: translateY(-8px) scale(0.88);
+      pointer-events: none;
+      filter: blur(0.35px) saturate(1.12);
+      transition: opacity 1500ms ease, transform 1500ms cubic-bezier(.18,.72,.16,1), filter 1050ms ease;
+    }
+
+    body.step-5 .rag-detail,
+    body.step-5 .rag-note {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
     body.step-4 .legend {
       opacity: 1;
       pointer-events: auto;
@@ -933,17 +1420,24 @@
     }
 
     body.step-5 .llm,
-    body.step-5 .rule-workbench {
+    body.step-5 .api-call-board,
+    body.step-6 .rule-workbench {
       opacity: 1;
       transform: translate(0, 0) scale(1);
       pointer-events: auto;
     }
 
-    body.step-5 .beam {
+    body.step-5 .api-call-board {
+      transition-delay: 260ms;
+    }
+
+    body.step-5 .beam,
+    body.step-6 .beam {
       opacity: 0;
     }
 
-    body.step-5 .pack {
+    body.step-5 .pack,
+    body.step-6 .pack {
       transform: scale(0.2);
       opacity: 0;
     }
@@ -980,7 +1474,9 @@
         grid-template-columns: 1fr;
         overflow: auto;
       }
-      .pack-output-grid { grid-template-columns: 1fr; }
+  
+
+    .pack-output-grid { grid-template-columns: 1fr; }
       .llm { right: 7%; width: 170px; }
     }
 
@@ -996,9 +1492,12 @@
 <body class="step-1">
   <main class="stage">
     <header>
-      <div>
+      <div class="header-left">
+        <a class="back-link" href="index.html" aria-label="Back to demo index"><span class="back-icon">&lt;</span><span>Index</span></a>
+        <div>
         <h1>From PDF to Structured Rule Table</h1>
         <div class="subtitle">A clickable presentation deck for graph/RAG rule extraction.</div>
+        </div>
       </div>
       <div class="stage-hint">Click any stage below to inspect and enrich that part of the flow.</div>
     </header>
@@ -1069,6 +1568,32 @@
         </div>
       </div>
 
+
+
+      <div class="api-flight-layer" id="apiFlightLayer" aria-hidden="true"></div>
+
+      <div class="api-call-board" aria-label="Parallel API call packages">
+        <div class="api-board-header">
+          <div>
+            <strong>Parallel API call batches</strong>
+            <span>Text uses Gemini 2.5 Flash; table-image packages use Gemini 3.1 Pro Preview with a vision/table prompt.</span>
+          </div>
+          <div class="api-stats" id="apiStats"></div>
+        </div>
+        <div class="api-package-grid" id="apiPackageGrid">
+          <div class="api-package-lanes">
+            <section class="api-lane text-lane" aria-label="Text API packages">
+              <div class="api-lane-title">Text packages <span>Gemini 2.5 Flash text API</span></div>
+              <div class="api-lane-grid" id="textApiGrid"></div>
+            </section>
+            <section class="api-lane table-lane" aria-label="Table API packages">
+              <div class="api-lane-title">Table packages <span>Gemini 3.1 Pro Preview table API</span></div>
+              <div class="api-lane-grid" id="tableApiGrid"></div>
+            </section>
+          </div>
+        </div>
+      </div>
+
       <div class="rule-workbench">
         <div class="pack-output-grid" aria-label="Pack-level extraction outputs">
           <div class="mini-rule-table">
@@ -1117,7 +1642,7 @@
         </div>
 
         <div class="merge-step">
-          <div class="merge-arrow">→</div>
+          <div class="merge-arrow">-&gt;</div>
           <div>post-process<br/>normalize<br/>deduplicate</div>
         </div>
 
@@ -1135,6 +1660,12 @@
               <tr><td>parking_location</td><td>required</td><td>rear if accessible</td><td>universal</td></tr>
             </tbody>
           </table>
+          <div class="final-run-summary">
+            <div><strong>Runtime</strong><span>165.0s</span></div>
+            <div><strong>Token use</strong><span>~101k</span></div>
+            <div><strong>Est. cost</strong><span>US$0.21 / CA$0.28</span></div>
+            <div><strong>Clean rules</strong><span>66</span></div>
+          </div>
         </div>
       </div>
 
@@ -1164,9 +1695,13 @@
         <div class="tech-chip" data-stage="4"><strong>Target adapter</strong><span>building-type scoped</span></div>
         <div class="tech-chip" data-stage="4"><strong>Table package</strong><span>visual extraction route</span></div>
 
-        <div class="tech-chip" data-stage="5"><strong>Gemini LLM</strong><span>text + table extraction</span></div>
-        <div class="tech-chip" data-stage="5"><strong>Canonicalization</strong><span>units, objects, operators</span></div>
-        <div class="tech-chip" data-stage="5"><strong>Local dedup</strong><span>merge repeated rules</span></div>
+        <div class="tech-chip" data-stage="5"><strong>Gemini LLM</strong><span>parallel text + table calls</span></div>
+        <div class="tech-chip" data-stage="5"><strong>Batch queue</strong><span>package progress tracking</span></div>
+        <div class="tech-chip" data-stage="5"><strong>API cache</strong><span>raw responses per package</span></div>
+
+        <div class="tech-chip" data-stage="6"><strong>Canonicalization</strong><span>units, objects, operators</span></div>
+        <div class="tech-chip" data-stage="6"><strong>Local dedup</strong><span>merge repeated rules</span></div>
+        <div class="tech-chip" data-stage="6"><strong>Review queue</strong><span>flag uncertain rows</span></div>
       </div>
 
       <div class="step">
@@ -1180,7 +1715,8 @@
       <button class="tick" data-step="2" type="button">2 Blocks</button>
       <button class="tick" data-step="3" type="button">3 RAG Structure</button>
       <button class="tick" data-step="4" type="button">4 Burnaby RAG Packs</button>
-      <button class="tick" data-step="5" type="button">5 Merge + Clean</button>
+      <button class="tick" data-step="5" type="button">5 API Calls</button>
+      <button class="tick" data-step="6" type="button">6 Post-process</button>
     </nav>
   </main>
 
@@ -1206,8 +1742,12 @@
         copy: 'This stage uses the actual Burnaby graph: text RAG packs plus the special table extraction package used for visual/table rules.'
       },
       {
-        title: '5. Pack Tables Are Merged And Deduplicated',
-        copy: 'Each pack returns its own rule table. Post-processing normalizes fields, flags duplicate rows, and merges them into one clean output table.'
+        title: '5. Parallel API Calls',
+        copy: 'RAG packs are converted into text and table API packages. They run in parallel, finish at different speeds, and write one raw rule table per package.'
+      },
+      {
+        title: '6. Post-process And Deduplicate',
+        copy: 'Pack-level rule tables are normalized, duplicate rows are marked, uncertain rows are queued for review, and clean rules are merged into the final table.'
       }
     ];
 
@@ -1222,8 +1762,24 @@
     const rawBlocks = window.BURNABY_RAW_BLOCKS || [];
     let ragGraph = null;
     let ragGraphReady = false;
+    let graphMode = 'full';
+    let pendingApiSourcePoints = null;
 
     const ragGraphData = window.BURNABY_RAG_GRAPH_DATA;
+
+    const apiPackages = [
+      { name: 'text_batch_001', type: 'text', time: '14s', progress: 100, duration: 2.4, result: '12 rules' },
+      { name: 'text_batch_002', type: 'text', time: '77s', progress: 100, duration: 5.8, result: '18 rules' },
+      { name: 'text_batch_003', type: 'text', time: '17s', progress: 100, duration: 2.7, result: '9 rules' },
+      { name: 'text_batch_004', type: 'text', time: '8s', progress: 100, duration: 1.8, result: '7 rules' },
+      { name: 'text_batch_005', type: 'text', time: '8s', progress: 100, duration: 1.9, result: '10 rules' },
+      { name: 'text_batch_006', type: 'text', time: '15s', progress: 100, duration: 2.5, result: '21 rules' },
+      { name: 'text_batch_007', type: 'text', time: '12s', progress: 100, duration: 2.2, result: '21 rules' },
+      { name: 'table_001', type: 'table', time: '26s', progress: 100, duration: 3.2, result: '10 rules' },
+      { name: 'table_002', type: 'table', time: '32s', progress: 100, duration: 3.7, result: '9 rules' },
+      { name: 'table_003', type: 'table', time: '163s', progress: 100, duration: 6.6, result: '48 rules' },
+      { name: 'table_004', type: 'table', time: '12s', progress: 100, duration: 2.1, result: '2 rules' }
+    ];
 
     const nodePositions = [
       ['n1', 330, 292], ['n2', 580, 128], ['n3', 580, 282],
@@ -1307,6 +1863,167 @@
       });
     }
 
+
+
+    function renderApiPackages() {
+      const grid = document.getElementById('apiPackageGrid');
+      const textGrid = document.getElementById('textApiGrid');
+      const tableGrid = document.getElementById('tableApiGrid');
+      const stats = document.getElementById('apiStats');
+      if (!grid || !textGrid || !tableGrid || !stats) return;
+      const sourcePoints = pendingApiSourcePoints || getGraphNodeScreenPoints(apiPackages.length);
+      pendingApiSourcePoints = null;
+      collapseGraphToPackageNodes();
+      textGrid.innerHTML = '';
+      tableGrid.innerHTML = '';
+      const textCount = apiPackages.filter(pkg => pkg.type === 'text').length;
+      const tableCount = apiPackages.filter(pkg => pkg.type === 'table').length;
+      stats.innerHTML = `<span>${apiPackages.length} parallel calls</span><span>${textCount} text packages</span><span>${tableCount} table packages</span>`;
+      apiPackages.forEach((pkg, index) => {
+        const el = document.createElement('div');
+        el.className = `api-package ${pkg.type === 'table' ? 'table' : 'text'}`;
+        el.dataset.apiIndex = String(index);
+        el.style.setProperty('--i', index);
+        el.style.setProperty('--p', `${pkg.progress || 100}%`);
+        el.style.setProperty('--dur', `${pkg.duration || 3}s`);
+        const previewRules = sampleRulesForPackage(pkg, index);
+        el.innerHTML = `
+          <div class="api-package-head"><span>${escapeHtml(pkg.name)}</span><span class="api-kind">${escapeHtml(pkg.type)}</span></div>
+          <div class="api-progress"><span></span></div>
+          <div class="api-package-foot"><span>${escapeHtml(pkg.time)}</span><span class="api-result">${escapeHtml(pkg.result)}</span></div>
+          <div class="api-rule-preview">
+            ${previewRules.map(rule => `<div class="api-rule-row"><strong>${escapeHtml(rule.name)}</strong><span>${escapeHtml(rule.value)}</span></div>`).join('')}
+          </div>
+        `;
+        (pkg.type === 'table' ? tableGrid : textGrid).appendChild(el);
+      });
+      requestAnimationFrame(() => animatePackageFlights(sourcePoints));
+    }
+
+    function sampleRulesForPackage(pkg, index) {
+      const textSamples = [
+        [{ name: 'height', value: '<= 10 m' }, { name: 'setback', value: '>= 3.0 m' }],
+        [{ name: 'use', value: 'permitted' }, { name: 'lot coverage', value: '<= 45%' }],
+        [{ name: 'parking', value: 'rear access' }, { name: 'separation', value: '>= 2.4 m' }],
+        [{ name: 'yard', value: 'lane 1.5 m' }, { name: 'storeys', value: '<= 3' }]
+      ];
+      const tableSamples = [
+        [{ name: 'table row', value: 'lot coverage' }, { name: 'value', value: '40% / 45%' }],
+        [{ name: 'table row', value: 'setback' }, { name: 'value', value: '1.2 m / 3.0 m' }],
+        [{ name: 'table row', value: 'height' }, { name: 'value', value: '7.5 m / 10 m' }]
+      ];
+      const source = pkg?.type === 'table' ? tableSamples : textSamples;
+      return source[index % source.length];
+    }
+
+    function animatePackageFlights(sourcePoints) {
+      const grid = document.getElementById('apiPackageGrid');
+      const layer = document.getElementById('apiFlightLayer');
+      const canvas = document.getElementById('canvas');
+      if (!grid || !layer || !canvas) return;
+      layer.innerHTML = '';
+      const canvasRect = canvas.getBoundingClientRect();
+      [...grid.querySelectorAll('.api-package')].forEach((card) => {
+        const index = Number(card.dataset.apiIndex || 0);
+        const pkg = apiPackages[index];
+        const source = sourcePoints[index % sourcePoints.length];
+        const rect = card.getBoundingClientRect();
+        const targetX = rect.left + rect.width / 2;
+        const targetY = rect.top + rect.height / 2;
+        const dot = document.createElement('div');
+        dot.className = `api-flight-dot ${pkg?.type === 'table' ? 'table' : 'text'}`;
+        dot.style.left = `${source.x - canvasRect.left}px`;
+        dot.style.top = `${source.y - canvasRect.top}px`;
+        layer.appendChild(dot);
+        const dx = targetX - source.x;
+        const dy = targetY - source.y;
+        const delay = index * 42;
+        setTimeout(() => {
+          dot.style.transform = 'translate(-50%, -50%) scale(0.62)';
+          dot.style.opacity = '0.92';
+        }, delay + 80);
+        setTimeout(() => {
+          dot.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.72)`;
+          dot.style.opacity = '0.30';
+        }, delay + 430);
+        setTimeout(() => {
+          card.classList.add('arrived');
+          dot.remove();
+          setTimeout(() => card.classList.add('done'), Math.round((pkg?.duration || 3) * 1000) + 260);
+        }, delay + 1760);
+      });
+    }
+
+    function isPackageGraphNode(node) {
+      const type = String(node?.details?.type || '').toLowerCase();
+      const group = String(node?.group || '').toLowerCase();
+      return type.includes('rag pack') || type.includes('table extraction package') || group.includes('table_extraction_package');
+    }
+
+    function packageGraphData() {
+      const source = ragGraphData || { nodes: [], links: [] };
+      const nodes = (source.nodes || []).filter(isPackageGraphNode).map(node => ({ ...node, fx: node.x, fy: node.y, fz: node.z }));
+      return { nodes, links: [] };
+    }
+
+    function restoreFullGraph() {
+      if (!ragGraph || graphMode === 'full' || !ragGraphData) return;
+      graphMode = 'full';
+      ragGraph.graphData(ragGraphData);
+      ragGraph.nodeOpacity(1).nodeVal(node => node.size || 4);
+      ragGraph.linkOpacity(0.56);
+      ragGraph.linkDirectionalParticles(link => link.type === 'contains' ? 2 : 1);
+      ragGraph.d3Force('charge').strength(-90);
+      ragGraph.d3Force('link').distance(link => link.type === 'contains' ? 74 : 38);
+    }
+
+    function collapseGraphToPackageNodes() {
+      if (!ragGraph || graphMode === 'packages' || !ragGraphData) return;
+      graphMode = 'packages';
+      ragGraph.graphData(packageGraphData());
+      ragGraph.linkOpacity(0);
+      ragGraph.linkDirectionalParticles(0);
+      ragGraph.d3Force('charge').strength(-35);
+      setTimeout(() => resizeRagGraph(), 30);
+    }
+
+
+    function getGraphNodeScreenPoints(count) {
+      const graphRect = ragGraphEl.getBoundingClientRect();
+      const fallback = [{
+        x: graphRect.left + graphRect.width * 0.5,
+        y: graphRect.top + graphRect.height * 0.45
+      }];
+      const nodes = (ragGraphData?.nodes || []).filter(isPackageGraphNode);
+      if (!nodes.length || graphRect.width <= 0 || graphRect.height <= 0) return fallback;
+
+      const points = nodes.map((node, index) => {
+        if (ragGraph && typeof ragGraph.graph2ScreenCoords === 'function' && Number.isFinite(node.x) && Number.isFinite(node.y) && Number.isFinite(node.z)) {
+          const p = ragGraph.graph2ScreenCoords(node.x, node.y, node.z);
+          if (p && Number.isFinite(p.x) && Number.isFinite(p.y)) {
+            return { x: graphRect.left + p.x, y: graphRect.top + p.y };
+          }
+        }
+        const angle = (index / Math.max(1, nodes.length)) * Math.PI * 2;
+        const radius = Math.min(graphRect.width, graphRect.height) * 0.28;
+        return {
+          x: graphRect.left + graphRect.width * 0.5 + Math.cos(angle) * radius,
+          y: graphRect.top + graphRect.height * 0.48 + Math.sin(angle) * radius
+        };
+      });
+
+      if (points.length >= count) return points;
+      const expanded = [];
+      for (let index = 0; index < count; index += 1) {
+        const point = points[index % points.length];
+        expanded.push({
+          x: point.x + ((index % 3) - 1) * 10,
+          y: point.y + (Math.floor(index / points.length) % 3 - 1) * 10
+        });
+      }
+      return expanded;
+    }
+
     function render() {
       document.body.className = `step-${step}`;
       title.textContent = steps[step - 1].title;
@@ -1317,7 +2034,13 @@
       });
       if (step === 4) {
         initRagGraph();
+        restoreFullGraph();
         resizeRagGraph();
+      }
+      if (step === 5) {
+        initRagGraph();
+        resizeRagGraph();
+        renderApiPackages();
       }
       if (step === 3) {
         requestAnimationFrame(updateNeutralEdges);
@@ -1395,21 +2118,31 @@
       ragGraph.height(Math.max(240, rect.height));
     }
 
+    function goToStep(nextStep) {
+      if (step === 4 && nextStep === 5) {
+        initRagGraph();
+        restoreFullGraph();
+        resizeRagGraph();
+        pendingApiSourcePoints = getGraphNodeScreenPoints(apiPackages.length);
+      } else {
+        pendingApiSourcePoints = null;
+      }
+      step = nextStep;
+      render();
+    }
+
     ticks.forEach((tick) => {
       tick.addEventListener('click', () => {
-        step = Number(tick.dataset.step);
-        render();
+        goToStep(Number(tick.dataset.step));
       });
     });
 
     window.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight') {
-        step = Math.min(5, step + 1);
-        render();
+        goToStep(Math.min(6, step + 1));
       }
       if (event.key === 'ArrowLeft') {
-        step = Math.max(1, step - 1);
-        render();
+        goToStep(Math.max(1, step - 1));
       }
     });
 
