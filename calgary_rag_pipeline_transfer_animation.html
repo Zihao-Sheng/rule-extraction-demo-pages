@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -686,19 +686,21 @@
 
     .api-flight-dot {
       position: absolute;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 24px rgba(56, 189, 248, 0.75);
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid rgba(224, 242, 254, 0.62);
+      background: rgba(56, 189, 248, 0.72);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.75), inset 0 0 10px rgba(224, 242, 254, 0.28);
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) rotate(45deg) scale(1);
       transition: transform 1380ms cubic-bezier(.18,.72,.16,1), opacity 620ms ease;
     }
 
     .api-flight-dot.table {
-      background: #facc15;
-      box-shadow: 0 0 24px rgba(250, 204, 21, 0.7);
+      border-color: rgba(254, 240, 138, 0.72);
+      background: rgba(250, 204, 21, 0.76);
+      box-shadow: 0 0 24px rgba(250, 204, 21, 0.7), inset 0 0 10px rgba(254, 249, 195, 0.32);
     }
 
     .api-call-board {
@@ -1441,7 +1443,6 @@
       transform: translateY(0);
     }
 
-    body.step-5 .llm,
     body.step-5 .api-call-board,
     body.step-6 .rule-workbench {
       opacity: 1;
@@ -1451,6 +1452,12 @@
 
     body.step-5 .api-call-board {
       transition-delay: 260ms;
+    }
+
+    body.step-5 .llm {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.72);
     }
 
     body.step-5 .beam,
@@ -1742,7 +1749,8 @@
     </nav>
   </main>
 
-  <script src="https://unpkg.com/3d-force-graph"></script>
+  <script src="vendor/three-0.160.0.min.js"></script>
+  <script src="vendor/3d-force-graph-1.73.4.min.js"></script>
   <script src="calgary_raw_blocks_data.js"></script>
   <script src="calgary_rag_graph_data.js"></script>
   <script>
@@ -1985,11 +1993,11 @@
         const dy = targetY - source.y;
         const delay = index * 42;
         setTimeout(() => {
-          dot.style.transform = 'translate(-50%, -50%) scale(0.62)';
+          dot.style.transform = 'translate(-50%, -50%) rotate(45deg) scale(0.62)';
           dot.style.opacity = '0.92';
         }, delay + 80);
         setTimeout(() => {
-          dot.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.72)`;
+          dot.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(45deg) scale(0.72)`;
           dot.style.opacity = '0.30';
         }, delay + 430);
         setTimeout(() => {
@@ -2006,6 +2014,48 @@
       return type.includes('rag pack') || type.includes('table extraction package') || group.includes('table_extraction_package');
     }
 
+
+
+
+
+    function makeGraphNodeObject(node) {
+      if (typeof THREE === 'undefined') return null;
+      const color = node.color || '#cbd5e1';
+      const radius = Math.max(3, Math.min(7, node.size || 4));
+
+      if (!isPackageGraphNode(node)) {
+        return new THREE.Mesh(
+          new THREE.SphereGeometry(radius, 20, 20),
+          new THREE.MeshLambertMaterial({ color, transparent: true, opacity: 0.92 })
+        );
+      }
+
+      const group = new THREE.Group();
+      const size = radius * 1.55;
+      const boxGeometry = new THREE.BoxGeometry(size, size, size);
+      const box = new THREE.Mesh(
+        boxGeometry,
+        new THREE.MeshLambertMaterial({ color, transparent: true, opacity: 0.32 })
+      );
+      box.rotation.set(0.58, 0.72, 0.42);
+      group.add(box);
+
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(boxGeometry),
+        new THREE.LineBasicMaterial({ color, transparent: true, opacity: 1 })
+      );
+      edges.rotation.copy(box.rotation);
+      group.add(edges);
+
+      const core = new THREE.Mesh(
+        new THREE.SphereGeometry(radius * 0.36, 16, 16),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95 })
+      );
+      group.add(core);
+
+      return group;
+    }
+
     function packageGraphData() {
       const source = ragGraphData || { nodes: [], links: [] };
       const nodes = (source.nodes || []).filter(isPackageGraphNode).map(node => ({ ...node, fx: node.x, fy: node.y, fz: node.z }));
@@ -2016,7 +2066,7 @@
       if (!ragGraph || graphMode === 'full' || !ragGraphData) return;
       graphMode = 'full';
       ragGraph.graphData(ragGraphData);
-      ragGraph.nodeOpacity(1).nodeVal(node => node.size || 4);
+      ragGraph.nodeOpacity(1).nodeVal(node => isPackageGraphNode(node) ? Math.max(7, (node.size || 4) * 1.35) : Math.max(2.6, (node.size || 4) * 0.82));
       ragGraph.linkOpacity(0.56);
       ragGraph.linkDirectionalParticles(link => link.type === 'contains' ? 2 : 1);
       ragGraph.d3Force('charge').strength(-90);
@@ -2111,8 +2161,9 @@
         .backgroundColor('rgba(0,0,0,0)')
         .nodeLabel(node => node.label)
         .nodeColor(node => node.color || '#cbd5e1')
-        .nodeVal(node => node.size || 4)
+        .nodeVal(node => isPackageGraphNode(node) ? Math.max(7, (node.size || 4) * 1.35) : Math.max(2.6, (node.size || 4) * 0.82))
         .nodeResolution(20)
+        .nodeThreeObject(makeGraphNodeObject)
         .linkColor(link => link.type === 'contains' ? 'rgba(250, 204, 21, 0.5)' : 'rgba(148, 163, 184, 0.36)')
         .linkWidth(link => link.value || 1)
         .linkOpacity(0.56)
