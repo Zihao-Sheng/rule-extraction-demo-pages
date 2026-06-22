@@ -978,11 +978,13 @@
 
     .pack-output-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(166px, 1fr));
       gap: 10px;
       height: 100%;
-      align-content: center;
+      align-content: start;
       min-height: 0;
+      overflow: auto;
+      padding: 2px 4px 8px 2px;
     }
 
     .mini-rule-table,
@@ -999,7 +1001,7 @@
     }
 
     .mini-rule-table {
-      align-self: center;
+      align-self: start;
       opacity: 0;
       transform: translateX(42px) scale(0.94);
     }
@@ -1487,6 +1489,140 @@
       font-size: 10px;
     }
 
+
+
+    /* Presentation readability pass: enlarge explanatory text without changing the flow layout. */
+    .stage-hint {
+      font-size: 13px;
+    }
+
+    .step {
+      width: min(500px, calc(100% - 36px));
+      padding: 15px 16px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .step-copy {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .node strong {
+      font-size: 14px;
+      line-height: 1.15;
+    }
+
+    .node span {
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .graph-flow-note {
+      width: 390px;
+      padding: 15px 16px;
+      font-size: 13px;
+      line-height: 1.48;
+    }
+
+    .graph-flow-note strong {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .pack h3 {
+      font-size: 14px;
+      line-height: 1.18;
+    }
+
+    .rag-detail {
+      width: min(470px, 46%);
+      padding: 15px 16px;
+    }
+
+    .rag-detail strong {
+      font-size: 16px;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .rag-detail span {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .rag-note {
+      font-size: 13px;
+      padding: 9px 13px;
+    }
+
+    .legend {
+      font-size: 13px;
+      padding: 12px 13px;
+      gap: 8px;
+    }
+
+    .legend div {
+      gap: 8px;
+    }
+
+    .api-board-header strong {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .api-board-header span {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .api-stats {
+      font-size: 12px;
+    }
+
+    .api-lane-title {
+      font-size: 15px;
+    }
+
+    .api-lane-title span {
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .api-package-head {
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .api-kind {
+      font-size: 10px;
+    }
+
+    .api-package-foot {
+      font-size: 12px;
+    }
+
+    .api-rule-row,
+    .api-rule-row strong {
+      font-size: 10px;
+    }
+
+    .tech-chip {
+      font-size: 12px;
+      padding: 9px 11px;
+    }
+
+    .tech-chip strong {
+      font-size: 12px;
+    }
+
+    .tech-chip span {
+      line-height: 1.35;
+    }
+
     @media (max-width: 860px) {
       .stage { padding: 12px; }
       header { align-items: flex-start; flex-direction: column; }
@@ -1624,51 +1760,7 @@
       </div>
 
       <div class="rule-workbench">
-        <div class="pack-output-grid" aria-label="Pack-level extraction outputs">
-          <div class="mini-rule-table">
-            <h3>Text Pack 007<br/>Development Regulations</h3>
-            <table>
-              <thead>
-                <tr><th>rule</th><th>value</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>front height</td><td>10 m / 9.5 m</td></tr>
-                <tr><td>rear height</td><td>7.5 m / 7.0 m</td></tr>
-                <tr class="duplicate"><td>street yard <span class="dup-tag">dup</span></td><td>3.0 m</td></tr>
-                <tr><td>lane yard</td><td>1.5 m</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mini-rule-table">
-            <h3>Table Package<br/>page_0002__table_001</h3>
-            <table>
-              <thead>
-                <tr><th>rule</th><th>value</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>lot coverage</td><td>40% / 45%</td></tr>
-                <tr class="duplicate"><td>street yard <span class="dup-tag">dup</span></td><td>3.0 m</td></tr>
-                <tr><td>side yard</td><td>1.2 m</td></tr>
-                <tr><td>building separation</td><td>2.4 m / 6.0 m</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mini-rule-table">
-            <h3>Universal Pack 010<br/>Parking / Access</h3>
-            <table>
-              <thead>
-                <tr><th>rule</th><th>value</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>parking location</td><td>rear if accessible</td></tr>
-                <tr><td>garage projection</td><td>&lt;= 1.2 m above grade</td></tr>
-                <tr class="duplicate"><td>rear parking <span class="dup-tag">dup</span></td><td>rear of lot</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="pack-output-grid" id="packOutputGrid" aria-label="Pack-level extraction outputs"></div>
 
         <div class="merge-step">
           <div class="merge-arrow">-&gt;</div>
@@ -1919,6 +2011,49 @@
 
 
 
+
+
+    function packOutputRows(pkg, index) {
+      const number = String(index + 1).padStart(2, '0');
+      if (pkg.type === 'table') {
+        return [
+          { rule: 'table rows extracted', value: pkg.result },
+          { rule: 'source image', value: pkg.name.replace('table_', 'table ') },
+          { rule: index % 2 === 0 ? 'setback duplicate' : 'height duplicate', value: 'merged later', duplicate: true }
+        ];
+      }
+      const samples = [
+        [{ rule: 'candidate rules', value: pkg.result }, { rule: 'source batch', value: pkg.name }, { rule: 'overlap row', value: 'dedup later', duplicate: true }],
+        [{ rule: 'target scoped rows', value: pkg.result }, { rule: 'runtime', value: pkg.time }, { rule: 'same-page context', value: 'kept' }],
+        [{ rule: 'text rules extracted', value: pkg.result }, { rule: 'pack id', value: `text ${number}` }, { rule: 'duplicate check', value: 'queued', duplicate: true }]
+      ];
+      return samples[index % samples.length];
+    }
+
+    function renderPackOutputTables() {
+      const grid = document.getElementById('packOutputGrid');
+      if (!grid || grid.dataset.rendered === 'true') return;
+      grid.dataset.rendered = 'true';
+      grid.innerHTML = apiPackages.map((pkg, index) => {
+        const title = pkg.type === 'table'
+          ? `Table Package<br/>${escapeHtml(pkg.name)}`
+          : `Text Pack ${String(index + 1).padStart(3, '0')}<br/>${escapeHtml(pkg.name)}`;
+        const rows = packOutputRows(pkg, index).map(row => `
+              <tr${row.duplicate ? ' class="duplicate"' : ''}><td>${escapeHtml(row.rule)}${row.duplicate ? ' <span class="dup-tag">dup</span>' : ''}</td><td>${escapeHtml(row.value)}</td></tr>`).join('');
+        return `
+          <div class="mini-rule-table" style="animation-delay:${90 + index * 35}ms">
+            <h3>${title}</h3>
+            <table>
+              <thead>
+                <tr><th>rule</th><th>value</th></tr>
+              </thead>
+              <tbody>${rows}
+              </tbody>
+            </table>
+          </div>`;
+      }).join('');
+    }
+
     function renderApiPackages() {
       const grid = document.getElementById('apiPackageGrid');
       const textGrid = document.getElementById('textApiGrid');
@@ -2137,6 +2272,9 @@
         initRagGraph();
         resizeRagGraph();
         renderApiPackages();
+      }
+      if (step === 6) {
+        renderPackOutputTables();
       }
       if (step === 3) {
         requestAnimationFrame(updateNeutralEdges);
