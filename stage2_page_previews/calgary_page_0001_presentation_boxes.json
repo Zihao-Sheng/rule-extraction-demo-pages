@@ -1,0 +1,46 @@
+{
+  "city": "calgary",
+  "coordinate_source": "manual visual presentation on clean PDF render",
+  "boxes": [
+    {
+      "id": "top_header",
+      "kind": "text",
+      "bbox": [
+        44,
+        34,
+        880,
+        126
+      ]
+    },
+    {
+      "id": "main_title",
+      "kind": "text",
+      "bbox": [
+        318,
+        248,
+        826,
+        342
+      ]
+    },
+    {
+      "id": "subtitle",
+      "kind": "text",
+      "bbox": [
+        318,
+        350,
+        575,
+        424
+      ]
+    },
+    {
+      "id": "document_body_panel",
+      "kind": "text",
+      "bbox": [
+        38,
+        448,
+        862,
+        1110
+      ]
+    }
+  ]
+}

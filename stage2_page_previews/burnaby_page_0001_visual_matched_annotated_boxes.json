@@ -1,0 +1,46 @@
+{
+  "city": "burnaby",
+  "coordinate_source": "visual rendered page pixels",
+  "kept": [
+    {
+      "kind": "text",
+      "id": "title_header",
+      "bbox": [
+        120,
+        118,
+        760,
+        151
+      ]
+    },
+    {
+      "kind": "text",
+      "id": "intent_paragraph",
+      "bbox": [
+        120,
+        176,
+        808,
+        231
+      ]
+    },
+    {
+      "kind": "table",
+      "id": "permitted_use_table",
+      "bbox": [
+        171,
+        258,
+        811,
+        606
+      ]
+    },
+    {
+      "kind": "table",
+      "id": "subdivision_table",
+      "bbox": [
+        171,
+        670,
+        810,
+        852
+      ]
+    }
+  ]
+}

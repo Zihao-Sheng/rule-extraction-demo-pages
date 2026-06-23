@@ -1,0 +1,76 @@
+{
+  "city": "burnaby",
+  "coordinate_source": "manual visual presentation on clean PDF render",
+  "boxes": [
+    {
+      "id": "district_title_line",
+      "kind": "text",
+      "bbox": [
+        82,
+        98,
+        812,
+        142
+      ]
+    },
+    {
+      "id": "intent_heading_and_text",
+      "kind": "text",
+      "bbox": [
+        82,
+        150,
+        812,
+        235
+      ]
+    },
+    {
+      "id": "permitted_use_table_full",
+      "kind": "table",
+      "bbox": [
+        168,
+        256,
+        812,
+        603
+      ]
+    },
+    {
+      "id": "subdivision_heading",
+      "kind": "text",
+      "bbox": [
+        82,
+        628,
+        812,
+        661
+      ]
+    },
+    {
+      "id": "subdivision_table_full",
+      "kind": "table",
+      "bbox": [
+        168,
+        666,
+        812,
+        853
+      ]
+    },
+    {
+      "id": "subdivision_footnotes",
+      "kind": "text",
+      "bbox": [
+        168,
+        858,
+        812,
+        974
+      ]
+    },
+    {
+      "id": "page_footer",
+      "kind": "text",
+      "bbox": [
+        82,
+        1031,
+        812,
+        1082
+      ]
+    }
+  ]
+}

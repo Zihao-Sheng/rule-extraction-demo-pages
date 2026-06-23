@@ -1,0 +1,64 @@
+{
+  "blocks": [
+    {
+      "label": "District Title",
+      "type": "text",
+      "bbox": [
+        88,
+        72,
+        763,
+        94
+      ]
+    },
+    {
+      "label": "Intent",
+      "type": "text",
+      "bbox": [
+        88,
+        127,
+        907,
+        172
+      ]
+    },
+    {
+      "label": "Permitted Uses",
+      "type": "table",
+      "bbox": [
+        88,
+        197,
+        893,
+        536
+      ]
+    },
+    {
+      "label": "Subdivision Regulations",
+      "type": "table",
+      "bbox": [
+        88,
+        567,
+        893,
+        779
+      ]
+    },
+    {
+      "label": "Footnotes",
+      "type": "text",
+      "bbox": [
+        187,
+        791,
+        885,
+        888
+      ]
+    },
+    {
+      "label": "Footer",
+      "type": "footer",
+      "bbox": [
+        100,
+        919,
+        895,
+        946
+      ]
+    }
+  ]
+}

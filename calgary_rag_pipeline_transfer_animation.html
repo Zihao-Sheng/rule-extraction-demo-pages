@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -307,6 +307,792 @@
     .pdf-lines span:nth-child(2n) { width: 74%; }
     .pdf-lines span:nth-child(3n) { width: 88%; }
 
+
+
+    .page-extract-demo {
+      position: absolute;
+      left: 28%;
+      top: 12%;
+      width: 250px;
+      min-height: 320px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-24px) scale(0.92);
+      transition: opacity 650ms ease, transform 850ms cubic-bezier(.2,.8,.2,1);
+      z-index: 5;
+    }
+
+    .page-card {
+      position: relative;
+      min-height: 318px;
+      border-radius: 8px;
+      border: 1px solid rgba(125, 211, 252, 0.32);
+      background: rgba(248, 250, 252, 0.96);
+      color: #0f172a;
+      box-shadow: 0 20px 54px rgba(0,0,0,0.36), 0 0 28px rgba(56, 189, 248, 0.12);
+      overflow: hidden;
+      padding: 18px 16px;
+    }
+
+    .page-card strong {
+      display: block;
+      color: #0f172a;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .page-title-line,
+    .page-section-line,
+    .page-text-line {
+      display: block;
+      border-radius: 999px;
+      background: #cbd5e1;
+      margin-bottom: 9px;
+    }
+
+    .page-title-line { width: 78%; height: 12px; background: #64748b; }
+    .page-section-line { width: 58%; height: 9px; background: #94a3b8; }
+    .page-text-line { width: 92%; height: 7px; }
+    .page-text-line.short { width: 64%; }
+
+    .block-token-cloud {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .block-token {
+      min-height: 38px;
+      border-radius: 6px;
+      border: 1px solid rgba(14, 165, 233, 0.34);
+      background: rgba(14, 165, 233, 0.08);
+      color: #075985;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 800;
+      transform: translateY(18px) scale(0.8);
+      opacity: 0;
+    }
+
+    .block-token.table-token {
+      border-color: rgba(202, 138, 4, 0.46);
+      background: rgba(250, 204, 21, 0.16);
+      color: #713f12;
+    }
+
+    body.step-2 .page-extract-demo {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    body.step-2 .block-token {
+      animation: blockTokenBurst 760ms cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay: calc(220ms + var(--i) * 80ms);
+    }
+
+    @keyframes blockTokenBurst {
+      0% { opacity: 0; transform: translateY(18px) scale(0.72); }
+      72% { opacity: 1; transform: translateY(-3px) scale(1.05); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    body.step-3 #n6 {
+      border-color: rgba(248, 113, 113, 0.42);
+      background: radial-gradient(circle at 24% 18%, rgba(248, 113, 113, 0.26), transparent 34%),
+                  linear-gradient(145deg, rgba(24, 12, 18, 0.9), rgba(8, 13, 24, 0.94));
+      opacity: 0.78;
+      filter: saturate(0.85);
+    }
+
+    body.step-3 #n6::after {
+      background: #f87171;
+      box-shadow: 0 0 22px rgba(248, 113, 113, 0.75);
+    }
+
+
+    .page-split-demo {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 28px;
+      bottom: 104px;
+      display: grid;
+      grid-template-columns: minmax(260px, 36%) minmax(420px, 1fr);
+      gap: 28px;
+      align-items: stretch;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 620ms ease, transform 780ms cubic-bezier(.2,.8,.2,1);
+      z-index: 6;
+    }
+
+    body.step-2 .page-split-demo {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    body.step-2 .block-strip {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    body.step-2 .page-split-demo {
+      left: 24px;
+      right: auto;
+      top: 46px;
+      bottom: 126px;
+      width: min(310px, 28vw);
+      grid-template-columns: 1fr;
+      z-index: 1;
+    }
+
+    body.step-2 .first-page-block-panel {
+      display: none;
+    }
+
+    body.step-2 .first-page-panel {
+      padding: 42px 14px 14px;
+    }
+
+    body.step-2 .block-strip {
+      left: min(370px, 30%);
+    }
+
+    .first-page-panel,
+    .first-page-block-panel {
+      position: relative;
+      border: 1px solid rgba(125, 211, 252, 0.28);
+      border-radius: 8px;
+      background: rgba(5, 12, 22, 0.72);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025), 0 20px 54px rgba(0,0,0,0.24);
+      overflow: hidden;
+    }
+
+    .first-page-panel::before,
+    .first-page-block-panel::before {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.82);
+      color: #dbeafe;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+    }
+
+    .first-page-panel::before { content: "complete first page"; }
+    .first-page-block-panel::before { content: "blocks cut from this page"; }
+
+    .first-page-panel {
+      display: grid;
+      place-items: center;
+      padding: 48px 20px 20px;
+    }
+
+    .page-preview-frame {
+      width: min(100%, 420px);
+      height: 100%;
+      display: grid;
+      place-items: center;
+      transform-origin: center;
+      animation: pageFloatIn 900ms cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .page-preview-frame img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 16px 42px rgba(0,0,0,0.38), 0 0 0 1px rgba(226,232,240,0.32);
+    }
+
+    .first-page-blocks {
+      height: 100%;
+      overflow: auto;
+      padding: 52px 18px 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      align-content: start;
+      gap: 16px;
+    }
+
+    .first-page-block {
+      position: relative;
+      border: 1px solid rgba(125, 211, 252, 0.36);
+      border-radius: 8px;
+      background: rgba(248, 250, 252, 0.98);
+      overflow: hidden;
+      min-height: 84px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      opacity: 0;
+      transform: translateX(-58px) translateY(var(--burst-y, 0px)) scale(0.74);
+      animation: pageBlockBurst 900ms cubic-bezier(.18,.82,.18,1) forwards;
+      animation-delay: calc(260ms + var(--i) * 75ms);
+    }
+
+    .first-page-block.table-block {
+      border-color: rgba(250, 204, 21, 0.72);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22), 0 0 0 1px rgba(250, 204, 21, 0.12);
+    }
+
+    .first-page-block img {
+      display: block;
+      width: 100%;
+      height: 112px;
+      object-fit: contain;
+      background: white;
+      transition: transform 180ms ease;
+    }
+
+    .first-page-block:hover img { transform: scale(1.045); }
+
+    .first-page-block-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 9px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #e0f2fe;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .first-page-block-label span:last-child {
+      color: #bae6fd;
+      font-weight: 700;
+    }
+
+    @keyframes pageFloatIn {
+      from { opacity: 0; transform: translateX(-24px) scale(0.94); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
+    }
+
+    @keyframes pageBlockBurst {
+      0% { opacity: 0; transform: translateX(-70px) translateY(var(--burst-y, 0px)) scale(0.62); }
+      68% { opacity: 1; transform: translateX(5px) translateY(0) scale(1.035); }
+      100% { opacity: 1; transform: translateX(0) translateY(0) scale(1); }
+    }
+
+
+
+
+    body.step-2 .block-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+      align-content: start;
+      gap: 12px;
+      padding-right: 12px;
+    }
+
+    body.step-2 .block-strip::before {
+      grid-column: 1 / -1;
+    }
+
+    body.step-2 .block-strip .block {
+      width: 100%;
+      min-height: 92px;
+      border-radius: 8px;
+      transition: opacity 420ms ease, transform 520ms ease, filter 420ms ease;
+    }
+
+    body.step-2 .block-strip .block img {
+      height: 76px;
+      object-fit: contain;
+    }
+
+    body.step-2 .block-strip .block-label {
+      font-size: 9px;
+      padding: 5px 6px;
+    }
+
+    body.tree-transitioning .block-strip {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 160ms ease !important;
+    }
+
+    body.tree-transitioning .block-strip .block {
+      opacity: 0 !important;
+      transform: scale(0.72);
+    }
+
+    .block-tree-transition-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      pointer-events: none;
+    }
+
+    .block-fly-clone {
+      position: fixed;
+      width: var(--w);
+      height: var(--h);
+      left: var(--x);
+      top: var(--y);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(248, 250, 252, 0.98);
+      border: 1px solid rgba(125, 211, 252, 0.45);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.34), 0 0 0 1px rgba(255,255,255,0.06);
+      transform-origin: center;
+      transition: transform 1120ms cubic-bezier(.18,.84,.22,1), opacity 1120ms ease, border-color 1120ms ease;
+    }
+
+    .block-fly-clone.table-block {
+      border-color: rgba(250, 204, 21, 0.78);
+    }
+
+    .block-fly-clone.rejected {
+      filter: grayscale(0.35) saturate(0.78);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+    }
+
+    .block-fly-clone img {
+      width: 100%;
+      height: 70%;
+      object-fit: contain;
+      background: white;
+      display: block;
+    }
+
+    .block-fly-clone span {
+      display: block;
+      height: 30%;
+      padding: 4px 6px;
+      background: rgba(15,23,42,0.95);
+      color: #e0f2fe;
+      font-size: 9px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+    .stage3-tree-demo {
+      position: absolute;
+      inset: 18px 28px 112px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px) scale(0.98);
+      transition: opacity 560ms ease, transform 760ms cubic-bezier(.2,.8,.2,1);
+      z-index: 8;
+    }
+
+    body.step-3 .stage3-tree-demo {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    body.tree-arrived .stage3-tree-demo,
+    body.tree-arrived .tree-node,
+    body.tree-arrived .tree-pruned-label {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: translate(0, 0) scale(1) !important;
+    }
+
+    body.tree-arrived .stage3-tree-lines line {
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+    }
+
+    body.step-3 .pdf {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    body.step-3 .node,
+    body.step-3 svg.edges {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    body.step-3 .graph-flow-note {
+      left: 24px;
+      top: 22px;
+      width: 360px;
+      z-index: 12;
+    }
+
+    .stage3-tree-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.86;
+    }
+
+    .stage3-tree-lines line {
+      stroke: rgba(125, 211, 252, 0.42);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: treeLineDraw 900ms ease forwards;
+    }
+
+    .stage3-tree-lines line.pruned-line {
+      stroke: rgba(248, 113, 113, 0.45);
+      stroke-dasharray: 8 7;
+    }
+
+    .tree-node {
+      position: absolute;
+      z-index: 5;
+      width: 124px;
+      min-height: 76px;
+      border: 1px solid rgba(125, 211, 252, 0.34);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(8, 16, 30, 0.88);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(255,255,255,0.025);
+      opacity: 0;
+      transform: translate(var(--fly-x, 280px), var(--fly-y, -10px)) scale(0.72);
+      animation: treeNodeDrop 820ms cubic-bezier(.16,.86,.2,1) forwards;
+      animation-delay: calc(120ms + var(--i) * 42ms);
+    }
+
+    .tree-node.root,
+    .tree-node.title,
+    .tree-node.subtitle {
+      width: 160px;
+      min-height: 80px;
+    }
+
+    .tree-node img {
+      display: block;
+      width: 100%;
+      height: 58px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .tree-node.root img,
+    .tree-node.title img,
+    .tree-node.subtitle img {
+      height: 48px;
+    }
+
+    .tree-caption {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 7px;
+      color: #e0f2fe;
+      font-size: 10px;
+      line-height: 1.16;
+      font-weight: 800;
+    }
+
+    .tree-kind {
+      border-radius: 999px;
+      padding: 3px 7px;
+      color: #031827;
+      background: #7dd3fc;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .tree-node.table {
+      border-color: rgba(250, 204, 21, 0.62);
+    }
+
+    .tree-node.table .tree-kind { background: #facc15; color: #332400; }
+    .tree-node.subtitle .tree-kind { background: #a78bfa; color: #100828; }
+    .tree-node.title .tree-kind, .tree-node.root .tree-kind { background: #38bdf8; color: #041521; }
+
+    .tree-node.pruned {
+      border-color: rgba(248, 113, 113, 0.58);
+      filter: grayscale(0.78) saturate(0.5);
+      opacity: 0.58;
+    }
+
+    .tree-node.pruned::before,
+    .tree-node.pruned::after {
+      content: "";
+      position: absolute;
+      left: -22px;
+      right: -22px;
+      top: 50%;
+      z-index: 8;
+      border-top: 4px solid rgba(248, 63, 63, 0.96);
+      box-shadow: 0 0 16px rgba(248, 63, 63, 0.45);
+      pointer-events: none;
+    }
+
+    .tree-node.pruned::before {
+      transform: rotate(-12deg);
+    }
+
+    .tree-node.pruned::after {
+      transform: rotate(12deg);
+    }
+
+    .tree-node.pruned .tree-caption {
+      color: #fecaca;
+    }
+
+    .tree-pruned-label {
+      position: absolute;
+      right: 22px;
+      bottom: 8px;
+      border: 1px solid rgba(248, 113, 113, 0.48);
+      border-radius: 8px;
+      background: rgba(35, 8, 15, 0.82);
+      color: #fecaca;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.26);
+      opacity: 0;
+      animation: treeNodeDrop 620ms cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay: 980ms;
+    }
+
+
+    .tree-pack-button {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 18;
+      border: 1px solid rgba(125, 211, 252, 0.42);
+      border-radius: 999px;
+      background: rgba(8, 16, 30, 0.82);
+      color: #e0f2fe;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .tree-pack-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(186, 230, 253, 0.72);
+      background: rgba(12, 28, 48, 0.92);
+    }
+
+    body.tree-packed-preview .tree-pack-button {
+      border-color: rgba(250, 204, 21, 0.58);
+      color: #fef9c3;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-node.pruned {
+      opacity: 0 !important;
+      transform: translate(110px, -30px) scale(0.42) !important;
+      pointer-events: none;
+      transition: opacity 520ms ease, transform 620ms cubic-bezier(.2,.8,.2,1), filter 520ms ease;
+    }
+
+    body.tree-packed-preview .tree-node:not(.pruned) {
+      border-color: rgba(148, 163, 184, 0.22);
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      transition: border-color 420ms ease, background 420ms ease, box-shadow 420ms ease;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-node:not(.pruned) img,
+    body.tree-packed-preview.tree-cards-fade .tree-node:not(.pruned) .tree-caption {
+      opacity: 0;
+      transform: scale(0.86);
+      transition: opacity 460ms ease, transform 520ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    body.tree-packed-preview .tree-node:not(.pruned)::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 9;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      transform: translate(-50%, -50%) scale(1);
+      border: 2px solid rgba(226, 232, 240, 0.78);
+      background: rgba(15, 23, 42, 0.48);
+      box-shadow: 0 0 22px rgba(226, 232, 240, 0.18);
+      transition: transform 520ms cubic-bezier(.2,.8,.2,1), background 420ms ease, border-color 420ms ease;
+    }
+
+    body.tree-packed-preview .tree-node.subtitle:not(.pruned)::after,
+    body.tree-packed-preview .tree-node.title:not(.pruned)::after,
+    body.tree-packed-preview .tree-node.root:not(.pruned)::after {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      background: rgba(15, 23, 42, 0.18);
+      border-color: rgba(226, 232, 240, 0.86);
+      transform: translate(-50%, -50%) rotate(45deg) skew(-8deg, -8deg);
+      box-shadow: 8px 8px 0 rgba(148, 163, 184, 0.18), 0 0 28px rgba(226, 232, 240, 0.18);
+    }
+
+    body.tree-packed-preview .tree-node.table:not(.pruned)::after {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border-color: rgba(250, 204, 21, 0.92);
+      background: rgba(250, 204, 21, 0.82);
+      box-shadow: 0 0 28px rgba(250, 204, 21, 0.45);
+    }
+
+    body.tree-packed-preview.tree-cards-fade .stage3-tree-lines line.pruned-line {
+      opacity: 0;
+      transition: opacity 520ms ease;
+    }
+
+    body.tree-packed-preview .stage3-tree-lines line:not(.pruned-line) {
+      stroke: rgba(226, 232, 240, 0.24);
+      stroke-width: 1.5;
+      transition: stroke 420ms ease, stroke-width 420ms ease;
+    }
+
+
+
+    .tree-pack-3d {
+      position: absolute;
+      inset: 46px 36px 34px;
+      z-index: 7;
+      opacity: 0;
+      pointer-events: none;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 8px;
+      background: radial-gradient(circle at 50% 44%, rgba(14, 165, 233, 0.16), rgba(2, 6, 12, 0.06) 54%, rgba(2, 6, 12, 0.02));
+      transition: opacity 540ms ease;
+      overflow: hidden;
+    }
+
+    .tree-pack-3d canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .tree-pack-3d-note {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      z-index: 2;
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.35;
+      opacity: 0.82;
+      pointer-events: none;
+    }
+
+
+    .tree-pack-3d-legend {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      z-index: 3;
+      display: grid;
+      gap: 8px;
+      min-width: 190px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 8px;
+      background: rgba(8, 16, 30, 0.78);
+      color: #dbeafe;
+      padding: 11px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.24);
+    }
+
+    .tree-pack-3d-legend div {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-cube,
+    .legend-sphere {
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+      border: 2px solid rgba(226,232,240,0.86);
+      background: rgba(226,232,240,0.12);
+      box-shadow: 0 0 12px rgba(226,232,240,0.18);
+    }
+
+    .legend-cube {
+      border-radius: 3px;
+      transform: rotate(45deg) skew(-8deg, -8deg);
+    }
+
+    .legend-sphere {
+      border-radius: 999px;
+    }
+
+    .legend-sphere.text-node {
+      background: rgba(226,232,240,0.28);
+    }
+
+    .legend-sphere.table-node {
+      border-color: rgba(250,204,21,0.95);
+      background: rgba(250,204,21,0.82);
+      box-shadow: 0 0 14px rgba(250,204,21,0.42);
+    }
+
+
+    body.tree-packed-preview .tree-pack-3d {
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-pack-3d {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-pack-3d {
+      z-index: 14;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-node:not(.pruned),
+    body.tree-packed-preview.tree-cards-fade .stage3-tree-lines line:not(.pruned-line) {
+      opacity: 0 !important;
+      transition: opacity 520ms ease;
+    }
+
+    body.tree-packed-preview.tree-cards-fade .tree-node:not(.pruned)::after {
+      display: none !important;
+    }
+
+
+    @keyframes treeNodeDrop {
+      0% { opacity: 0; transform: translate(var(--fly-x, 280px), var(--fly-y, -10px)) scale(0.72); }
+      72% { opacity: 1; transform: translate(-4px, 2px) scale(1.035); }
+      100% { opacity: 1; transform: translate(0, 0) scale(1); }
+    }
+
+    @keyframes treeLineDraw {
+      to { stroke-dashoffset: 0; }
+    }
+
+
     .block-strip {
       position: absolute;
       left: min(340px, 26%);
@@ -335,7 +1121,7 @@
       background: rgba(15, 23, 42, 0.82);
       color: #cbd5e1;
       padding: 6px 9px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       backdrop-filter: blur(8px);
     }
@@ -497,7 +1283,7 @@
       background: rgba(8, 13, 24, 0.82);
       color: #cbd5e1;
       padding: 12px 13px;
-      font-size: 11px;
+      font-size: 10px;
       line-height: 1.38;
       opacity: 0;
       transform: translateY(12px);
@@ -597,7 +1383,7 @@
     .rag-detail span {
       display: block;
       color: #cbd5e1;
-      font-size: 11px;
+      font-size: 10px;
       line-height: 1.42;
       white-space: pre-wrap;
     }
@@ -610,7 +1396,7 @@
       border-radius: 999px;
       background: rgba(8, 13, 24, 0.78);
       color: #cbd5e1;
-      font-size: 11px;
+      font-size: 10px;
       padding: 8px 11px;
       pointer-events: none;
     }
@@ -666,8 +1452,8 @@
       top: 100px;
       bottom: 92px;
       display: grid;
-      grid-template-columns: minmax(440px, 1.45fr) 92px minmax(360px, 0.9fr);
-      gap: 14px;
+      grid-template-columns: minmax(300px, 1fr) 78px minmax(560px, 2fr);
+      gap: 20px;
       align-items: center;
       opacity: 0;
       transform: translateY(24px) scale(0.98);
@@ -740,7 +1526,7 @@
 
     .api-board-header span {
       color: #94a3b8;
-      font-size: 11px;
+      font-size: 10px;
       line-height: 1.36;
     }
 
@@ -869,7 +1655,7 @@
       gap: 8px;
       margin-bottom: 8px;
       color: #e5e7eb;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
     }
 
@@ -978,7 +1764,7 @@
 
     .pack-output-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(166px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       height: 100%;
       align-content: start;
@@ -1025,7 +1811,7 @@
     }
 
     .mini-rule-table h3 {
-      font-size: 11px;
+      font-size: 10px;
       min-height: 44px;
       display: flex;
       align-items: center;
@@ -1038,6 +1824,8 @@
         rgba(8, 13, 24, 0.9);
       opacity: 0;
       transform: translateX(38px) scale(0.96);
+      width: 100%;
+      justify-self: stretch;
     }
 
     body.step-6 .clean-rule-table {
@@ -1052,7 +1840,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 10px;
     }
 
     th, td {
@@ -1105,10 +1893,11 @@
       gap: 8px;
       color: #cbd5e1;
       text-align: center;
-      font-size: 11px;
+      font-size: 10px;
       line-height: 1.25;
       opacity: 0;
       transform: scale(0.82);
+      justify-self: center;
     }
 
     body.step-6 .merge-step {
@@ -1214,7 +2003,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 10px;
-      font-size: 11px;
+      font-size: 10px;
       color: #cbd5e1;
       opacity: 0;
       pointer-events: none;
@@ -1652,6 +2441,50 @@
         animation: none;
       }
     }
+  
+    body.step-6 .clean-rule-table h3 {
+      font-size: 15px;
+      padding: 12px 14px;
+    }
+
+    body.step-6 .clean-rule-table table {
+      font-size: 12px;
+    }
+
+    body.step-6 .clean-rule-table th,
+    body.step-6 .clean-rule-table td {
+      padding: 10px 12px;
+    }
+
+    body.step-6 .clean-rule-table .final-run-summary {
+      font-size: 12px;
+    }
+      body.step-6 .clean-rule-table .final-run-summary {
+      font-size: 16px;
+      border-top: 1px solid rgba(34, 197, 94, 0.58);
+      background: rgba(20, 83, 45, 0.38);
+    }
+
+    body.step-6 .clean-rule-table .final-run-summary div {
+      padding: 15px 16px;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(187, 247, 208, 0.12), transparent 46%),
+        rgba(6, 30, 24, 0.86);
+    }
+
+    body.step-6 .clean-rule-table .final-run-summary strong {
+      font-size: 13px;
+      letter-spacing: 0;
+      color: #bbf7d0;
+      margin-bottom: 7px;
+    }
+
+    body.step-6 .clean-rule-table .final-run-summary span {
+      font-size: 20px;
+      font-weight: 800;
+      color: #f8fafc;
+      line-height: 1.1;
+    }
   </style>
 </head>
 <body class="step-1">
@@ -1686,18 +2519,86 @@
         </div>
       </div>
 
+      <div class="page-split-demo" aria-label="First page block cutting preview">
+        <div class="first-page-panel">
+          <div class="page-preview-frame">
+            <img src="stage2_page_previews/calgary_page_0001_presentation_boxes.png" alt="Calgary first page reconstructed from raw PDF blocks" />
+          </div>
+        </div>
+        <div class="first-page-block-panel">
+          <div class="first-page-blocks" id="firstPageBlocks"></div>
+        </div>
+      </div>
+
+
       <div class="block-strip" id="rawBlockStrip" aria-label="Raw Calgary PDF block crops"></div>
 
-      <div class="node" id="n1"><strong>Calgary Land Use Bylaw</strong><span>document root</span></div>
-      <div class="node" id="n2"><strong>Page / Section Order</strong><span>backyard suite / secondary suite</span></div>
-      <div class="node" id="n3"><strong>Candidate Blocks</strong><span>6009 local blocks -> target recall</span></div>
-      <div class="node" id="n4"><strong>Compressed Evidence</strong><span>drop noise, keep context</span></div>
-      <div class="node" id="n5"><strong>Text Evidence</strong><span>178 filtered evidence blocks</span></div>
-      <div class="node" id="n6"><strong>Visual Evidence</strong><span>1 table region + page crops</span></div>
+      <div class="node" id="n1"><strong>Calgary Land Use PDF</strong><span>document root</span></div>
+      <div class="node" id="n2"><strong>Part / District Title</strong><span>largest title level</span></div>
+      <div class="node" id="n3"><strong>Backyard Suite Sections</strong><span>smaller title / section</span></div>
+      <div class="node" id="n4"><strong>Use + Dimensional Rules</strong><span>subsection context</span></div>
+      <div class="node" id="n5"><strong>Single Blocks / Leaves</strong><span>text, list, table crops</span></div>
+      <div class="node" id="n6"><strong>Unused Branches Pruned</strong><span>not sent to API</span></div>
+
+
+
+      <div class="stage3-tree-demo" aria-label="RAG tree construction demo">
+        <button class="tree-pack-button" type="button" id="treePackButton">Pack preview</button>
+        <svg class="stage3-tree-lines" viewBox="0 0 1200 620" preserveAspectRatio="none">
+          <line data-from="t0" data-to="t1" />
+          <line data-from="t0" data-to="t2" />
+          <line data-from="t0" data-to="t3" class="pruned-line" />
+          <line data-from="t1" data-to="t4" />
+          <line data-from="t1" data-to="t17" class="pruned-line" />
+          <line data-from="t2" data-to="t5" />
+          <line data-from="t2" data-to="t6" />
+          <line data-from="t2" data-to="t7" />
+          <line data-from="t2" data-to="t8" />
+          <line data-from="t2" data-to="t9" />
+          <line data-from="t3" data-to="t10" class="pruned-line" />
+          <line data-from="t3" data-to="t15" class="pruned-line" />
+          <line data-from="t3" data-to="t16" class="pruned-line" />
+          <line data-from="t3" data-to="t18" class="pruned-line" />
+          <line data-from="t3" data-to="t19" class="pruned-line" />
+          <line data-from="t4" data-to="t11" />
+          <line data-from="t4" data-to="t12" />
+          <line data-from="t7" data-to="t13" />
+          <line data-from="t8" data-to="t14" />
+        </svg>
+        <div data-tree-id="t0" class="tree-node root title" style="left: calc(50% - 86px); top: 18px; --i:0"><img src="calgary_raw_block_crops/page_0001__local_001.png" alt="title block"><div class="tree-caption"><span class="tree-kind">title</span><span>Land Use Bylaw</span></div></div>
+        <div data-tree-id="t1" class="tree-node subtitle" style="left: calc(18% - 86px); top: 135px; --i:1"><img src="calgary_raw_block_crops/page_0003__local_001.png" alt="subtitle"><div class="tree-caption"><span class="tree-kind">subtitle</span><span>Part / Division</span></div></div>
+        <div data-tree-id="t2" class="tree-node subtitle" style="left: calc(50% - 86px); top: 135px; --i:2"><img src="calgary_raw_block_crops/page_0004__local_002.png" alt="subtitle"><div class="tree-caption"><span class="tree-kind">subtitle</span><span>Backyard Suite</span></div></div>
+        <div data-tree-id="t3" class="tree-node subtitle pruned" style="left: calc(82% - 86px); top: 135px; --i:3"><img src="calgary_raw_block_crops/page_0006__local_001.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">subtitle</span><span>Other section</span></div></div>
+        <div data-tree-id="t4" class="tree-node text" style="left: calc(7% - 66px); top: 292px; --i:4"><img src="calgary_raw_block_crops/page_0001__local_002.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>context</span></div></div>
+        <div data-tree-id="t5" class="tree-node text" style="left: calc(20% - 66px); top: 292px; --i:5"><img src="calgary_raw_block_crops/page_0001__local_003.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>definition</span></div></div>
+        <div data-tree-id="t6" class="tree-node table" style="left: calc(33% - 66px); top: 292px; --i:6"><img src="calgary_raw_block_crops/page_0004__local_002.png" alt="table"><div class="tree-caption"><span class="tree-kind">table</span><span>standards</span></div></div>
+        <div data-tree-id="t7" class="tree-node text" style="left: calc(46% - 66px); top: 292px; --i:7"><img src="calgary_raw_block_crops/page_0003__local_003.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>permission</span></div></div>
+        <div data-tree-id="t8" class="tree-node text" style="left: calc(59% - 66px); top: 292px; --i:8"><img src="calgary_raw_block_crops/page_0003__local_004.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>setback</span></div></div>
+        <div data-tree-id="t9" class="tree-node text" style="left: calc(72% - 66px); top: 292px; --i:9"><img src="calgary_raw_block_crops/page_0003__local_005.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>height</span></div></div>
+        <div data-tree-id="t10" class="tree-node text pruned" style="left: calc(88% - 66px); top: 292px; --i:10"><img src="calgary_raw_block_crops/page_0006__local_002.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">text</span><span>unrelated text</span></div></div>
+        <div data-tree-id="t11" class="tree-node text" style="left: calc(11% - 66px); top: 430px; --i:11"><img src="calgary_raw_block_crops/page_0004__local_001.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>rule note</span></div></div>
+        <div data-tree-id="t12" class="tree-node text" style="left: calc(24% - 66px); top: 430px; --i:12"><img src="calgary_raw_block_crops/page_0004__local_003.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>condition</span></div></div>
+        <div data-tree-id="t13" class="tree-node text" style="left: calc(40% - 66px); top: 430px; --i:13"><img src="calgary_raw_block_crops/page_0004__local_004.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>exception</span></div></div>
+        <div data-tree-id="t14" class="tree-node text" style="left: calc(55% - 66px); top: 430px; --i:14"><img src="calgary_raw_block_crops/page_0006__local_003.png" alt="text"><div class="tree-caption"><span class="tree-kind">text</span><span>parking</span></div></div>
+        <div data-tree-id="t15" class="tree-node subtitle pruned" style="left: calc(70% - 66px); top: 430px; --i:15"><img src="calgary_raw_block_crops/page_0006__local_004.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">subtitle</span><span>other use</span></div></div>
+        <div data-tree-id="t16" class="tree-node text pruned" style="left: calc(82% - 66px); top: 430px; --i:16"><img src="calgary_raw_block_crops/page_0006__local_005.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">text</span><span>not target</span></div></div>
+        <div data-tree-id="t17" class="tree-node text pruned" style="left: calc(5% - 66px); top: 186px; --i:17"><img src="calgary_raw_block_crops/page_0006__local_006.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">text</span><span>discarded</span></div></div>
+        <div data-tree-id="t18" class="tree-node text pruned" style="left: calc(91% - 66px); top: 430px; --i:18"><img src="calgary_raw_block_crops/page_0006__local_007.png" alt="unrelated"><div class="tree-caption"><span class="tree-kind">text</span><span>noise</span></div></div>
+        <div data-tree-id="t19" class="tree-node text pruned" style="left: calc(76% - 66px); top: 526px; --i:19"><img src="calgary_raw_block_crops/page_0006__local_008.png" alt="unrelated text"><div class="tree-caption"><span class="tree-kind">text</span><span>discarded block</span></div></div>
+        <div class="tree-pruned-label">crossed branches: unrelated to laneway home</div>
+        <div class="tree-pack-3d" id="treePack3d" aria-label="3D unclassified pack preview">
+          <div class="tree-pack-3d-legend">
+            <div><span class="legend-cube"></span><span>title / subtitle node</span></div>
+            <div><span class="legend-sphere text-node"></span><span>text block node</span></div>
+            <div><span class="legend-sphere table-node"></span><span>table block node</span></div>
+          </div>
+          <div class="tree-pack-3d-note">3D preview before rule-role coloring: structure is packed, text remains unclassified.</div>
+        </div>
+      </div>
 
       <div class="graph-flow-note">
-        <strong>Neutral graph stage</strong>
-        Blocks are recalled, linked back to page/section parents, and compressed before rule-role packs are built.
+        <strong>Hierarchy before extraction</strong>
+        The pipeline lays the PDF into a hierarchy: title -> subtitle -> text/table leaves. Before filtering, unrelated branches are still visible; then they are pruned before RAG packing.
       </div>
 
       <div class="pack" id="p1">
@@ -1717,7 +2618,7 @@
         <div class="rag-graph" id="ragGraph"></div>
         <div class="rag-detail">
           <strong id="ragDetailTitle">Calgary RAG Pack Graph</strong>
-          <span id="ragDetailCopy">Real pipeline output: 130 RAG packs, 178 evidence blocks, and 1 table region. Drag to rotate, scroll to zoom, and click a node to inspect its metadata.</span>
+          <span id="ragDetailCopy">Stage 4 colors the retained hierarchy: orange core/target rules, blue use permissions, purple dimensional rules, green universal/parking context, and yellow table packages. Click a node to inspect the evidence behind that pack.</span>
         </div>
         <div class="rag-note">interactive 3D graph</div>
       </div>
@@ -1827,15 +2728,15 @@
 
       <div class="step">
         <div class="step-title" id="stepTitle">1. Source PDF</div>
-        <div class="step-copy" id="stepCopy">The zoning bylaw starts as a PDF. The pipeline reads page text, table regions, and page order.</div>
+        <div class="step-copy" id="stepCopy">Start from the original bylaw PDF. The first goal is not extraction yet: it is to preserve page order and identify where rules live.</div>
       </div>
     </section>
 
     <nav class="timeline" aria-label="Pipeline stages">
       <button class="tick active current" data-step="1" type="button">1 PDF</button>
-      <button class="tick" data-step="2" type="button">2 Blocks</button>
-      <button class="tick" data-step="3" type="button">3 RAG Structure</button>
-      <button class="tick" data-step="4" type="button">4 Calgary RAG Packs</button>
+      <button class="tick" data-step="2" type="button">2 Page -> Blocks</button>
+      <button class="tick" data-step="3" type="button">3 Title Tree</button>
+      <button class="tick" data-step="4" type="button">4 Color + Packs</button>
       <button class="tick" data-step="5" type="button">5 API Calls</button>
       <button class="tick" data-step="6" type="button">6 Post-process</button>
     </nav>
@@ -1849,19 +2750,19 @@
     const steps = [
       {
         title: '1. Source PDF',
-        copy: 'The zoning bylaw starts as a PDF. The pipeline reads page text, table regions, and page order.'
+        copy: 'Start from the original bylaw PDF. The first goal is not extraction yet: it is to preserve page order and identify where rules live.'
       },
       {
-        title: '2. PDF Sliced Into Blocks',
-        copy: 'The Calgary PDF has 6009 local text blocks. For presentation speed, this stage previews the first 101 raw block crops and omits the rest.'
+        title: '2. Pull One Page And Cut Blocks',
+        copy: 'A sample page stays on the left, while the right side previews the first 100 Calgary raw blocks before filtering. These blocks then reorganize into the title tree.'
       },
       {
-        title: '3. Build One Neutral RAG Structure',
-        copy: 'Raw blocks are recalled, scored, compressed, and linked to page/section parents. This is a neutral evidence graph before rule-role packing.'
+        title: '3. Build A Title-to-Block Tree',
+        copy: 'The PDF is unfolded from big title to smaller title to subsection to single block. Irrelevant branches are pruned before any LLM call.'
       },
       {
-        title: '4. Real Calgary RAG Pack Graph',
-        copy: 'This stage uses the current Calgary graph: 130 filtered RAG packs, 178 evidence blocks, plus the table package when table regions exist.'
+        title: '4. Color And Pack The RAG Tree',
+        copy: 'The neutral tree is colored by rule role. Trunk/context nodes keep structure; leaf nodes become core, dimensional, universal, or table extraction packs.'
       },
       {
         title: '5. Parallel API Calls',
@@ -1946,7 +2847,212 @@
       setBeam('beam2', 720 * sx, 335 * sy, 220 * sx, -16);
       setBeam('beam3', 935 * sx, 350 * sy, 210 * sx, 52);
       requestAnimationFrame(updateNeutralEdges);
+      requestAnimationFrame(updateStage3TreeLines);
     }
+
+
+
+
+    let treePack3d = null;
+    let treePack3dReady = false;
+    let treePack3dAnimation = null;
+
+    function initTreePack3d() {
+      const el = document.getElementById('treePack3d');
+      if (!el || treePack3dReady || typeof THREE === 'undefined') return;
+      treePack3dReady = true;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 1000);
+      camera.position.set(0, 18, 245);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x000000, 0);
+      el.appendChild(renderer.domElement);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.72));
+      const key = new THREE.PointLight(0x7dd3fc, 1.25, 420);
+      key.position.set(90, 120, 140);
+      scene.add(key);
+      const warm = new THREE.PointLight(0xfacc15, 0.65, 260);
+      warm.position.set(-80, -40, 100);
+      scene.add(warm);
+
+      const group = new THREE.Group();
+      group.position.y = 10;
+      group.scale.set(0.82, 0.82, 0.82);
+      scene.add(group);
+      const matText = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.15, roughness: 0.42, transparent: true, opacity: 0.34 });
+      const matTable = new THREE.MeshStandardMaterial({ color: 0xfacc15, emissive: 0x7a4f00, emissiveIntensity: 0.22, metalness: 0.08, roughness: 0.34 });
+      const matCube = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.2, roughness: 0.36, transparent: true, opacity: 0.22 });
+      const edgeMat = new THREE.LineBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.72 });
+      const linkMat = new THREE.LineBasicMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0 });
+
+      const nodeDefs = [
+        ['root','cube',0,44,0,'t0'], ['intent','cube',-58,16,8,'t1'], ['permitted','cube',0,14,0,'t2'], ['other','cube',58,16,-5,'t3'],
+        ['text1','text',-88,-20,10,'t4'], ['table1','table',-58,-22,0,'t5'], ['text2','text',-26,-22,-8,'t6'], ['table2','table',8,-22,10,'t7'],
+        ['text3','text',40,-22,-4,'t8'], ['text4','text',74,-22,8,'t9'], ['note1','text',-70,-54,-5,'t11'], ['note2','text',-34,-58,6,'t12'],
+        ['tab3','table',0,-56,-8,'t13'], ['note3','text',36,-56,5,'t14']
+      ];
+      const meshes = new Map();
+      function screenToPack3dStart(treeId, fallbackX, fallbackY, fallbackZ) {
+        const tree = document.querySelector('.stage3-tree-demo');
+        const elRect = el.getBoundingClientRect();
+        const node = tree?.querySelector(`[data-tree-id="${treeId}"]`);
+        if (!node || !elRect.width || !elRect.height) return new THREE.Vector3(fallbackX, fallbackY, fallbackZ);
+        const r = node.getBoundingClientRect();
+        const sx = r.left + r.width / 2;
+        const sy = r.top + r.height / 2;
+        const ndc = new THREE.Vector3(
+          ((sx - elRect.left) / elRect.width) * 2 - 1,
+          -(((sy - elRect.top) / elRect.height) * 2 - 1),
+          0.5
+        );
+        ndc.unproject(camera);
+        const dir = ndc.sub(camera.position).normalize();
+        const distance = (0 - camera.position.z) / dir.z;
+        const worldPoint = camera.position.clone().add(dir.multiplyScalar(distance));
+        group.updateMatrixWorld(true);
+        return group.worldToLocal(worldPoint);
+      }
+
+      nodeDefs.forEach(([id, type, x, y, z, treeId]) => {
+        let mesh;
+        if (type === 'cube') {
+          const geo = new THREE.BoxGeometry(13, 13, 13);
+          mesh = new THREE.Mesh(geo, matCube.clone());
+          const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat.clone());
+          mesh.add(edges);
+        } else {
+          const geo = new THREE.SphereGeometry(type === 'table' ? 7.2 : 5.8, 24, 16);
+          mesh = new THREE.Mesh(geo, type === 'table' ? matTable.clone() : matText.clone());
+        }
+        mesh.userData.target = new THREE.Vector3(x, y, z);
+        mesh.userData.treeId = treeId;
+        mesh.position.copy(screenToPack3dStart(treeId, x * 1.75, y * 1.8, z));
+        group.add(mesh);
+        meshes.set(id, mesh);
+      });
+      const links = [];
+      [['root','intent'],['root','permitted'],['root','other'],['intent','text1'],['intent','table1'],['permitted','text2'],['permitted','table2'],['permitted','text3'],['permitted','text4'],['text1','note1'],['table1','note2'],['table2','tab3'],['text3','note3']].forEach(([a,b]) => {
+        const geo = new THREE.BufferGeometry().setFromPoints([meshes.get(a).position, meshes.get(b).position]);
+        const line = new THREE.Line(geo, linkMat.clone());
+        group.add(line);
+        links.push({ line, a: meshes.get(a), b: meshes.get(b) });
+      });
+
+      function updatePack3dLinks() {
+        links.forEach(({ line, a, b }) => {
+          line.geometry.setFromPoints([a.position, b.position]);
+          line.geometry.attributes.position.needsUpdate = true;
+        });
+      }
+
+      function resize() {
+        const rect = el.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        camera.aspect = rect.width / rect.height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(rect.width, rect.height, false);
+      }
+      const clock = new THREE.Clock();
+      function resetTreePack3dNodes() {
+        clock.start();
+        nodeDefs.forEach(([id, type, x, y, z, treeId]) => {
+          const mesh = meshes.get(id);
+          if (mesh) {
+            mesh.position.copy(screenToPack3dStart(treeId, x * 1.75, y * 1.8, z));
+            mesh.scale.set(1, 1, 1);
+          }
+        });
+        updatePack3dLinks();
+      }
+
+      function animate() {
+        treePack3dAnimation = requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+        const canCollapse = document.body.classList.contains('tree-collapse-ready');
+        const delayed = canCollapse ? Math.max(0, elapsed - 0.92) : 0;
+        const settle = Math.min(1, delayed / 1.25);
+        const ease = 1 - Math.pow(1 - settle, 3);
+        const wobble = delayed <= 0 ? 0 : Math.sin(delayed * 13) * Math.exp(-delayed * 2.2) * 0.08;
+        meshes.forEach((mesh) => {
+          if (delayed > 0) {
+            mesh.position.lerp(mesh.userData.target, 0.065 + ease * 0.04);
+          }
+          const jelly = 1 + wobble;
+          mesh.scale.set(jelly, 1 / Math.max(0.82, jelly), jelly);
+        });
+        updatePack3dLinks();
+        links.forEach(({ line }) => {
+          const targetOpacity = canCollapse ? 0.28 : 0;
+          line.material.opacity += (targetOpacity - line.material.opacity) * 0.08;
+        });
+        group.rotation.y = Math.sin(elapsed * 0.5) * 0.2;
+        group.rotation.x = -0.08 + Math.sin(elapsed * 0.7) * 0.045;
+        renderer.render(scene, camera);
+      }
+      treePack3d = { resize, animate, renderer, scene, camera, reset: resetTreePack3dNodes };
+      resize();
+      animate();
+    }
+
+    function resizeTreePack3d() {
+      if (treePack3d) treePack3d.resize();
+    }
+
+
+    let treePreviewTimers = [];
+
+    function clearTreePreviewTimers() {
+      treePreviewTimers.forEach((timer) => clearTimeout(timer));
+      treePreviewTimers = [];
+    }
+
+    function setTreePackedPreview(enabled) {
+      clearTreePreviewTimers();
+      document.body.classList.toggle('tree-packed-preview', enabled);
+      document.body.classList.remove('tree-cards-fade', 'tree-collapse-ready');
+      if (enabled) {
+        initTreePack3d();
+        requestAnimationFrame(() => {
+          resizeTreePack3d();
+          if (treePack3d?.reset) treePack3d.reset();
+        });
+        treePreviewTimers.push(setTimeout(() => document.body.classList.add('tree-cards-fade'), 360));
+        treePreviewTimers.push(setTimeout(() => document.body.classList.add('tree-collapse-ready'), 920));
+      }
+      requestAnimationFrame(updateStage3TreeLines);
+    }
+
+
+    function updateStage3TreeLines() {
+      const tree = document.querySelector('.stage3-tree-demo');
+      const svg = document.querySelector('.stage3-tree-lines');
+      if (!tree || !svg) return;
+      const rect = tree.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+      const center = (id) => {
+        const node = tree.querySelector(`[data-tree-id="${id}"]`);
+        if (!node) return null;
+        const r = node.getBoundingClientRect();
+        return { x: r.left - rect.left + r.width / 2, y: r.top - rect.top + r.height / 2 };
+      };
+      svg.querySelectorAll('line[data-from][data-to]').forEach((line) => {
+        const from = center(line.dataset.from);
+        const to = center(line.dataset.to);
+        if (!from || !to) return;
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const len = Math.hypot(dx, dy) || 1;
+        const startPad = 54;
+        const endPad = 58;
+        line.setAttribute('x1', from.x + dx / len * startPad);
+        line.setAttribute('y1', from.y + dy / len * startPad);
+        line.setAttribute('x2', to.x - dx / len * endPad);
+        line.setAttribute('y2', to.y - dy / len * endPad);
+      });
+    }
+
 
     function updateNeutralEdges() {
       const canvas = document.getElementById('canvas');
@@ -1985,6 +3091,29 @@
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
       }[ch]));
     }
+
+    function renderFirstPageSplit() {
+      const firstPageBlocks = document.getElementById('firstPageBlocks');
+      if (!firstPageBlocks) return;
+      firstPageBlocks.innerHTML = '';
+      const usable = rawBlocks.filter(block => !block.omitted && block.src);
+      const pages = Array.from(new Set(usable.map(block => Number(block.page)).filter(Number.isFinite))).sort((a, b) => a - b);
+      const firstPage = pages.length ? pages[0] : null;
+      const blocks = firstPage === null ? usable.slice(0, 12) : usable.filter(block => Number(block.page) === firstPage);
+      blocks.forEach((block, index) => {
+        const el = document.createElement('div');
+        el.className = `first-page-block ${block.kind === 'table' ? 'table-block' : 'text-block'}`;
+        el.style.setProperty('--i', index);
+        el.style.setProperty('--burst-y', `${((index % 5) - 2) * 18}px`);
+        el.title = `${block.id || ''}\npage ${block.page || ''}\n${block.section || ''}`;
+        el.innerHTML = `
+          <img src="${escapeHtml(block.src)}" alt="${escapeHtml(block.label || block.id || 'first page block')}" />
+          <div class="first-page-block-label"><span>${escapeHtml(block.kind || 'block')}</span><span>${escapeHtml(block.id || `block_${index + 1}`)}</span></div>
+        `;
+        firstPageBlocks.appendChild(el);
+      });
+    }
+
 
     function renderRawBlocks() {
       rawBlockStrip.innerHTML = '';
@@ -2255,8 +3384,97 @@
       return expanded;
     }
 
+
+    function animateBlocksIntoTree(done) {
+      const tree = document.querySelector('.stage3-tree-demo');
+      if (!tree || !rawBlockStrip) {
+        done();
+        return;
+      }
+      const allBlocks = [...rawBlockStrip.querySelectorAll('.block:not(.omitted-block)')];
+      const targetNodes = [...tree.querySelectorAll('.tree-node[data-tree-id]')].slice(0, 20);
+      if (!allBlocks.length || !targetNodes.length) {
+        done();
+        return;
+      }
+
+      document.body.classList.add('tree-transitioning');
+      const layer = document.createElement('div');
+      layer.className = 'block-tree-transition-layer';
+      document.body.appendChild(layer);
+      const clones = [];
+      const targetCount = Math.min(20, allBlocks.length, targetNodes.length);
+      const visibleBlocks = allBlocks.filter((block) => {
+        const r = block.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth;
+      });
+      const animatedBlocks = Array.from(new Set([...allBlocks.slice(0, targetCount), ...visibleBlocks]));
+
+      animatedBlocks.forEach((source, index) => {
+        const s = source.getBoundingClientRect();
+        const clone = source.cloneNode(true);
+        const isTarget = index < targetCount;
+        clone.className = `block-fly-clone ${source.classList.contains('table-block') ? 'table-block' : 'text-block'}${isTarget ? '' : ' rejected'}`;
+        clone.style.setProperty('--x', `${s.left}px`);
+        clone.style.setProperty('--y', `${s.top}px`);
+        clone.style.setProperty('--w', `${s.width}px`);
+        clone.style.setProperty('--h', `${s.height}px`);
+        clone.style.transitionDelay = `${Math.min(index, 32) * 18}ms`;
+        layer.appendChild(clone);
+        source.style.opacity = '0';
+        source.style.visibility = 'hidden';
+        source.style.transform = 'scale(0.76)';
+        source.style.pointerEvents = 'none';
+
+        if (isTarget) {
+          const target = targetNodes[index];
+          const t = target.getBoundingClientRect();
+          clones.push({
+            clone,
+            source,
+            dx: t.left + t.width / 2 - (s.left + s.width / 2),
+            dy: t.top + t.height / 2 - (s.top + s.height / 2),
+            scale: Math.max(0.42, Math.min(t.width / Math.max(1, s.width), t.height / Math.max(1, s.height)))
+          });
+        } else {
+          const direction = index % 2 === 0 ? 1 : -1;
+          clones.push({
+            clone,
+            source,
+            dx: window.innerWidth - s.left + 180 + (index % 5) * 34,
+            dy: direction * (160 + (index % 7) * 22),
+            scale: 0.58,
+            rejected: true
+          });
+        }
+      });
+
+      requestAnimationFrame(() => {
+        clones.forEach(({ clone, dx, dy, scale, rejected }) => {
+          clone.style.transform = `translate(${dx}px, ${dy}px) scale(${scale}) rotate(${rejected ? 7 : 0}deg)`;
+          clone.style.opacity = rejected ? '0.92' : '0.98';
+        });
+      });
+
+      setTimeout(() => {
+        animatedBlocks.forEach((source) => {
+          source.style.opacity = '';
+          source.style.visibility = '';
+          source.style.transform = '';
+          source.style.pointerEvents = '';
+        });
+        layer.remove();
+        document.body.classList.remove('tree-transitioning');
+        document.body.classList.add('tree-arrived');
+        done();
+        setTimeout(() => document.body.classList.remove('tree-arrived'), 180);
+      }, 1380);
+    }
+
+
     function render() {
       document.body.className = `step-${step}`;
+      if (step !== 3) document.body.classList.remove('tree-packed-preview', 'tree-cards-fade', 'tree-collapse-ready');
       title.textContent = steps[step - 1].title;
       copy.textContent = steps[step - 1].copy;
       ticks.forEach((tick, index) => {
@@ -2278,6 +3496,7 @@
       }
       if (step === 3) {
         requestAnimationFrame(updateNeutralEdges);
+        requestAnimationFrame(updateStage3TreeLines);
       }
     }
 
@@ -2354,6 +3573,15 @@
     }
 
     function goToStep(nextStep) {
+      document.body.classList.remove('tree-arrived');
+      if (step === 2 && nextStep === 3) {
+        pendingApiSourcePoints = null;
+        animateBlocksIntoTree(() => {
+          step = nextStep;
+          render();
+        });
+        return;
+      }
       if (step === 4 && nextStep === 5) {
         initRagGraph();
         restoreFullGraph();
@@ -2372,6 +3600,11 @@
       });
     });
 
+    const treePackButton = document.getElementById('treePackButton');
+    if (treePackButton) {
+      treePackButton.addEventListener('click', () => setTreePackedPreview(!document.body.classList.contains('tree-packed-preview')));
+    }
+
     window.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight') {
         goToStep(Math.min(6, step + 1));
@@ -2384,10 +3617,13 @@
     window.addEventListener('resize', () => {
       placeResponsive();
       updateNeutralEdges();
+      updateStage3TreeLines();
+      resizeTreePack3d();
       resizeRagGraph();
     });
     placeResponsive();
     renderRawBlocks();
+    renderFirstPageSplit();
     render();
   </script>
 </body>

@@ -1,0 +1,29 @@
+{
+  "city": "calgary",
+  "kept": [
+    {
+      "bbox": [
+        586,
+        401,
+        723,
+        436
+      ],
+      "kind": "text",
+      "label": "text: 24-0039584: CRV-31053",
+      "priority": 2.1371959942775396,
+      "source": "visual 0.38"
+    },
+    {
+      "bbox": [
+        357,
+        548,
+        707,
+        602
+      ],
+      "kind": "text",
+      "label": "text: The Land Use Bylaw 1P2007 is",
+      "priority": 2.540772532188841,
+      "source": "visual 0.23"
+    }
+  ]
+}

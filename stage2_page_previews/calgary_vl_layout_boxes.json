@@ -1,0 +1,54 @@
+{
+  "blocks": [
+    {
+      "label": "Page Header",
+      "type": "text",
+      "bbox": [
+        901,
+        49,
+        1179,
+        64
+      ]
+    },
+    {
+      "label": "Section Title and Table Introduction",
+      "type": "text",
+      "bbox": [
+        118,
+        104,
+        917,
+        221
+      ]
+    },
+    {
+      "label": "Motor Vehicle Parking Stall Dimensions Table",
+      "type": "table",
+      "bbox": [
+        236,
+        240,
+        808,
+        372
+      ]
+    },
+    {
+      "label": "Detailed Parking Regulations",
+      "type": "text",
+      "bbox": [
+        118,
+        406,
+        1180,
+        868
+      ]
+    },
+    {
+      "label": "Page Footer",
+      "type": "footer",
+      "bbox": [
+        117,
+        945,
+        885,
+        960
+      ]
+    }
+  ]
+}
